@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int fibonacci(int n) {
+void fibonacci(int n) {
     if (n <= 1) {
         cout << n << endl;
     } else {
@@ -16,7 +16,6 @@ int fibonacci(int n) {
         }        
         cout << fn << endl;
     }
-    return 0;
 }
 
 int main(){

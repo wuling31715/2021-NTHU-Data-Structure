@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-void sum(int n) {
+int sum(int n) {
     int array[n];
     int total = 0;
     for (int i = 0; i < n; i++) {
@@ -10,7 +10,7 @@ void sum(int n) {
     for (int i = 0; i < n; i++) {
         total += array[i];
     }
-    cout << total << endl;
+    return total;
 }
 
 int main(){

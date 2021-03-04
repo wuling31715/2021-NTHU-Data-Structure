@@ -2,8 +2,14 @@
 using namespace std; 
 
 int main() { 
-    cout << "Hello! World!\n" << endl; 
-    cout << "哈囉! C++!\n" << endl;
+    int i;
+    string name;
+    cin >> i;
+    cin >> name;
+    cout << i << endl;
+    cout << name << endl;
+    cout << "Hello! World! " << i << endl; 
+    cout << "哈囉! " << name << endl;
     return 0; 
 }
 

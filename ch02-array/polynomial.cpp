@@ -25,5 +25,3 @@ class Term {
         float coef;
         int exp;
 };
-
-

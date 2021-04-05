@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class Stack{
+class Stack {
     private:
         int top;              
         int capacity;     
@@ -19,7 +19,7 @@ class Stack{
         int getSize();
 };
 
-void Stack::Push(int x){
+void Stack::Push(int x) {
     if (top == capacity - 1) {
         cout << "Full" << endl;
         return;
@@ -27,7 +27,7 @@ void Stack::Push(int x){
     stack[++top] = x;
 }
 
-void Stack::Pop(){
+void Stack::Pop() {
     if (isEmpty()) {
         cout << "Empty" << endl;
         return;
@@ -35,7 +35,7 @@ void Stack::Pop(){
     top--;      
 }
 
-bool Stack::isEmpty(){
+bool Stack::isEmpty() {
        if (top == -1) {
            return true;
        }
@@ -44,14 +44,14 @@ bool Stack::isEmpty(){
        }
 }
 
-int Stack::getTop(){
+int Stack::getTop() {
     if (isEmpty()) { 
         return -1;
     }
     return stack[top];
 }
 
-int Stack::getSize(){
+int Stack::getSize() {
     return top + 1;
 }
 

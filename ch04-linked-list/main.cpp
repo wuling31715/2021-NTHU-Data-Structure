@@ -1,7 +1,5 @@
 #include <iostream>     
 using namespace std; 
-
-class LinkedList;   
                     
 class ListNode{
     private:
@@ -25,7 +23,12 @@ class LinkedList{
         void Delete(int x);   
         void Clear();         
         void Reverse();   
+        void GetSize();
 };
+
+void LinkedList::GetSize(){
+    cout << this -> size << endl;
+}
 
 void LinkedList::Traversal(){
     if (first == 0) {
@@ -43,20 +46,23 @@ void LinkedList::Traversal(){
 void LinkedList::PushFront(int x){
     ListNode *newNode = new ListNode(x);
     newNode->next = first;              
-    first = newNode;                    
+    first = newNode;           
+    this -> size ++;         
 }
 
 void LinkedList::PushBack(int x){
     ListNode *newNode = new ListNode(x);
     if (first == 0) {                   
         first = newNode;
+        this -> size ++;         
         return;
     }
     ListNode *current = first;
     while (current->next != 0) {           
         current = current->next;
     }
-    current->next = newNode;               
+    current->next = newNode;   
+    this -> size ++;            
 }
 
 void LinkedList::Delete(int x){
@@ -72,12 +78,14 @@ void LinkedList::Delete(int x){
     } else if (current == first) {       
     	first = current->next;          
         delete current;                 
-        current = 0;             
+        current = 0;       
+        this -> size --;                  
         return;                     
     } else {                     
         previous->next = current->next;
         delete current;
         current = 0;
+        this -> size --;            
         return;
     }
 }
@@ -89,6 +97,7 @@ void LinkedList::Clear(){
         delete current;
         current = 0;
     }
+    this -> size = 0;            
 }
 
 void LinkedList::Reverse(){

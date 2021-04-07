@@ -27,7 +27,7 @@ class LinkedList{
 };
 
 void LinkedList::GetSize(){
-    cout << this -> size << endl;
+    cout << this->size << endl;
 }
 
 void LinkedList::Traversal(){
@@ -37,55 +37,55 @@ void LinkedList::Traversal(){
     }
     ListNode *current = first;             
     while (current != 0) {                 
-        cout << current -> data << " ";
-        current = current -> next;
+        cout << current->data << " ";
+        current = current->next;
     }
     cout << endl;
 }
 
 void LinkedList::PushFront(int x){
     ListNode *newNode = new ListNode(x);
-    newNode -> next = first;              
+    newNode->next = first;              
     first = newNode;           
-    this -> size ++;         
+    this->size ++;         
 }
 
 void LinkedList::PushBack(int x){
     ListNode *newNode = new ListNode(x);
     if (first == 0) {                   
         first = newNode;
-        this -> size ++;         
+        this->size ++;         
         return;
     }
     ListNode *current = first;
-    while (current -> next != 0) {           
-        current = current -> next;
+    while (current->next != 0) {           
+        current = current->next;
     }
-    current -> next = newNode;   
-    this -> size ++;            
+    current->next = newNode;   
+    this->size ++;            
 }
 
 void LinkedList::Delete(int x){
     ListNode *current = first,      
              *previous = 0;
-    while (current != 0 && current -> data != x) {  
+    while (current != 0 && current->data != x) {  
         previous = current;                       
-        current = current -> next;                  
+        current = current->next;                  
     } 
     if (current == 0) {
         cout << "Node not found.\n";
         return;
     } else if (current == first) {       
-    	first = current -> next;          
+    	first = current->next;          
         delete current;                 
         current = 0;       
-        this -> size --;                  
+        this->size --;                  
         return;                     
     } else {                     
-        previous -> next = current -> next;
+        previous->next = current->next;
         delete current;
         current = 0;
-        this -> size --;            
+        this->size --;            
         return;
     }
 }
@@ -93,27 +93,27 @@ void LinkedList::Delete(int x){
 void LinkedList::Clear(){
     while (first != 0) {      
         ListNode *current = first;
-        first = first -> next;
+        first = first->next;
         delete current;
         current = 0;
     }
-    this -> size = 0;            
+    this->size = 0;            
 }
 
 void LinkedList::Reverse(){
-    if (first == 0 || first -> next == 0) {
+    if (first == 0 || first->next == 0) {
         return;
     }
     ListNode *previous = 0,
              *current = first,
-             *preceding = first -> next;
+             *preceding = first->next;
     while (preceding != 0) {
-        current -> next = previous;     
+        current->next = previous;     
         previous = current;           
         current = preceding;          
         preceding = preceding->next;  
     }                                 
-    current -> next = previous;         
+    current->next = previous;         
     first = current;
 }
 

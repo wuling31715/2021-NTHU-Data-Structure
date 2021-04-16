@@ -427,7 +427,7 @@ void machine_machine_play() {
 }
 
 int main() {
-    machine_human_play();
-//    machine_machine_play();
+    // machine_human_play();
+    machine_machine_play();
     return 0;
 }

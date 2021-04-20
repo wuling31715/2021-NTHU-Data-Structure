@@ -18,7 +18,7 @@ public:
 };
 class BinaryTree{
 public:
-    TreeNode *root;			    // 以root作為存取整棵樹的起點
+    TreeNode *root;	 // 以root作為存取整棵樹的起點
     BinaryTree():root(0){};
     BinaryTree(TreeNode *node):root(node){};
     
@@ -38,36 +38,36 @@ public:
 
 };
 
-void BinaryTree::Preorder(TreeNode *current){
-    if (current) {                          // if current != NULL
-        cout << current->str << " ";   // V
-        Preorder(current->leftchild);       // L
-        Preorder(current->rightchild);      // R
+void BinaryTree::Preorder(TreeNode *current){ // V -> L -> R
+    if (current) {     
+        cout << current->str << " ";   
+        Preorder(current->leftchild);       
+        Preorder(current->rightchild);    
     }
 }
 
-void BinaryTree::Inorder(TreeNode *current){
-    if (current) {                          // if current != NULL
-        Inorder(current->leftchild);        // L
-        cout << current->str << " ";   // V
-        Inorder(current->rightchild);       // R
+void BinaryTree::Inorder(TreeNode *current){ // L -> V -> R
+    if (current) {     
+        Inorder(current->leftchild);        
+        cout << current->str << " ";   
+        Inorder(current->rightchild);       
     }
 }
 
-void BinaryTree::Postorder(TreeNode *current){
-    if (current) {                          // if current != NULL
-        Postorder(current->leftchild);      // L
-        Postorder(current->rightchild);     // R
-        cout << current->str << " ";   // V
+void BinaryTree::Postorder(TreeNode *current){ // L -> R -> V
+    if (current) {    
+        Postorder(current->leftchild);      
+        Postorder(current->rightchild);     
+        cout << current->str << " ";   
     }
 }
 
 void BinaryTree::Levelorder(){
     
     queue<TreeNode*> q;
-    q.push(this->root);					    // 把root作為level-order traversal之起點
+    q.push(this->root);	  // 把root作為level-order traversal之起點
     								        // 推進queue中
-    while (!q.empty()){                     // 若queue不是空的, 表示還有node沒有visiting
+    while (!q.empty()){ // 若queue不是空的, 表示還有node沒有visiting
 
     	TreeNode *current = q.front();      // 取出先進入queue的node
     	q.pop();                          

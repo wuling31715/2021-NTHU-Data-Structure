@@ -10,13 +10,11 @@ public:
     TreeNode *leftchild;
     TreeNode *rightchild;
     TreeNode *parent;
-    std::string str;
+    string str;
     
     TreeNode():leftchild(0),rightchild(0),parent(0),str(""){};
     TreeNode(string s):leftchild(0),rightchild(0),parent(0),str(s){};
     
-    // friend class BinaryTree; 
-    // 因為這裡將data member都設成public, 所以class BunaryTree可以直接存取
 };
 class BinaryTree{
 public:
@@ -39,6 +37,7 @@ public:
     void Inorder_Reverse(TreeNode *root);
 
 };
+
 void BinaryTree::Preorder(TreeNode *current){
     if (current) {                          // if current != NULL
         cout << current->str << " ";   // V
@@ -46,6 +45,7 @@ void BinaryTree::Preorder(TreeNode *current){
         Preorder(current->rightchild);      // R
     }
 }
+
 void BinaryTree::Inorder(TreeNode *current){
     if (current) {                          // if current != NULL
         Inorder(current->leftchild);        // L
@@ -53,6 +53,7 @@ void BinaryTree::Inorder(TreeNode *current){
         Inorder(current->rightchild);       // R
     }
 }
+
 void BinaryTree::Postorder(TreeNode *current){
     if (current) {                          // if current != NULL
         Postorder(current->leftchild);      // L
@@ -60,6 +61,7 @@ void BinaryTree::Postorder(TreeNode *current){
         cout << current->str << " ";   // V
     }
 }
+
 void BinaryTree::Levelorder(){
     
     queue<TreeNode*> q;
@@ -79,12 +81,14 @@ void BinaryTree::Levelorder(){
         }
     }
 }
+
 TreeNode* BinaryTree::leftmost(TreeNode *current){
     while (current->leftchild != NULL){
         current = current->leftchild;
     }
     return current;
 }
+
 TreeNode* BinaryTree::InorderSuccessor(TreeNode *current){
     if (current->rightchild != NULL){
         return leftmost(current->rightchild);
@@ -98,6 +102,7 @@ TreeNode* BinaryTree::InorderSuccessor(TreeNode *current){
     }
     return successor;
 }
+
 void BinaryTree::Inorder_by_parent(TreeNode *root){
     TreeNode *current = new TreeNode;
     current = leftmost(root);
@@ -107,12 +112,14 @@ void BinaryTree::Inorder_by_parent(TreeNode *root){
         current = InorderSuccessor(current);
     }
 }
+
 TreeNode* BinaryTree::rightmost(TreeNode *current){
     while (current->rightchild != NULL){
         current = current->rightchild;
     }
     return current;
 }
+
 TreeNode* BinaryTree::InorderPredecessor(TreeNode *current){
     if (current->leftchild != NULL){
         return rightmost(current->leftchild);
@@ -123,14 +130,13 @@ TreeNode* BinaryTree::InorderPredecessor(TreeNode *current){
     while (predecessor != NULL && current == predecessor->leftchild) {
         current = predecessor;
         predecessor = predecessor->parent;
-    }
-    
+    }    
     return predecessor;
 }
+
 void BinaryTree::Inorder_Reverse(TreeNode *root){
     TreeNode *current = new TreeNode;
     current = rightmost(root);
-
     while(current){
         cout << current->str << " ";
         current = InorderPredecessor(current);

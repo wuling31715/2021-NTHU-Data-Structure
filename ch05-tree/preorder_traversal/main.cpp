@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <iostream>
-
 using namespace std;
 
 typedef struct node *Nodeptr;

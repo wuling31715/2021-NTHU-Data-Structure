@@ -1,10 +1,10 @@
 #include <iostream>
-
 using namespace std;
 
 struct Node {
 	int data;
-	Node* left, * right;
+	Node* left;
+	Node* right;
 };
 
 /* Helper function that allocates a new node */
@@ -19,38 +19,30 @@ Node* insertLevelOrder(int arr[], Node* root, int i, int n) {
 	if (i < n) {
 		Node* temp = newNode(arr[i]);
 		root = temp;
-		// insert left child
 		root->left = insertLevelOrder(arr, root->left, 2 * i + 1, n);
-		// insert right child
 		root->right = insertLevelOrder(arr, root->right, 2 * i + 2, n);
 	}
 	return root;
 }
 
-void inOrder(Node* root)
-{
-	if (root != NULL)
-	{
+void inOrder(Node* root) {
+	if (root != NULL) {
 		inOrder(root->left);
 		cout << root->data <<" ";
 		inOrder(root->right);
 	}
 }
 
-void preOrder(Node* root)
-{
-	if (root != NULL)
-	{
+void preOrder(Node* root) {
+	if (root != NULL) {
 		cout << root->data <<" ";
 		preOrder(root->left);
 		preOrder(root->right);
 	}
 }
 
-void postOrder(Node* root)
-{
-	if (root != NULL)
-	{
+void postOrder(Node* root) {
+	if (root != NULL) {
 		postOrder(root->left);
 		postOrder(root->right);
 		cout << root->data <<" ";

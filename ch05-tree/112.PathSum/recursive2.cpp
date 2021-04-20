@@ -1,7 +1,6 @@
 class Solution {
 public:
     bool hasPathSum(TreeNode* root, int sum) {
-		//edge
         if (root == NULL) {
             return false;
         }

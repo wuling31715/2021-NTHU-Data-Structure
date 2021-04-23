@@ -27,13 +27,13 @@ Node* insertNode(int **matrix, int **visited, int r, int c, Node* root, int y, i
 		root = temp;
         visited[y][x] = 1;
         // show visited
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-                cout << visited[i][j] << " ";
-            }
-            cout << endl;
-        }
-        cout << endl;
+        // for (int i = 0; i < r; i++) {
+        //     for (int j = 0; j < c; j++) {
+        //         cout << visited[i][j] << " ";
+        //     }
+        //     cout << endl;
+        // }
+        // cout << endl;
         // visit left
         if (x - 1 >= 0 && matrix[y][x - 1] != 0 && visited[y][x - 1] != 1) {
             root->left = insertNode(matrix, visited, r, c, root->left, y, x - 1);
@@ -96,7 +96,7 @@ void printArray(int* path, int pathLen) {
     int sum = 0;
     bool flag = true;
 	for (int i = 0; i < pathLen; i++) {
-		cout << path[i] << " ";
+		// cout << path[i] << " ";
         sum += path[i];
         if (path[i] == -1) {
             flag = false;
@@ -105,7 +105,7 @@ void printArray(int* path, int pathLen) {
     if (sum < MIN && flag) {
         MIN = sum;
     }
-    cout << "sum = " << sum << endl;
+    // cout << "sum = " << sum << endl;
 }
 
 int main(void) {
@@ -122,11 +122,11 @@ int main(void) {
     for (int i = 0; i < r; i++) {
         for (int j = 0; j < c; j++) {
             cin >> matrix[i][j];
-            cout << matrix[i][j] << " ";
+            // cout << matrix[i][j] << " ";
         }
-        cout << endl;
+        // cout << endl;
     }
-    cout << endl;
+    // cout << endl;
     Node* root = insertNode(matrix, visited, r, c, root, y, x);
     // preOrder(root);
     printPaths(root, r * c);

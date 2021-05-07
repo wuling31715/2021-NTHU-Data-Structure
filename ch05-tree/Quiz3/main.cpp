@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int MAX = -1;
+int MAX = 0;
 
 struct Node {
 	int data;
@@ -86,8 +86,8 @@ void printPathsRecur(Node* node, int* path, int pathLen, int r, int c) {
 	path[pathLen] = node->data;
 	pathLen++;
 	
-	/* it's a leaf, so print the path that led to here */
-	if (node->left == NULL && node->down == NULL && node->right == NULL && node->up == NULL && node->y == r - 1 && node->x == c - 1) {
+	/* if to the destination, print the path that led to here */
+	if (node->y == r - 1 && node->x == c - 1) {
 		printArray(path, pathLen);
 	} else {
 		/* otherwise try both subtrees */

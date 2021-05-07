@@ -1,19 +1,23 @@
 #include <iostream>
 using namespace std;
 
-int MIN = 1000000;
+int MAX = 0;
 
 struct Node {
 	int data;
+    int x;
+    int y;
 	Node* left;
     Node* down;
 	Node* right;
     Node* up;
 };
 
-Node* newNode(int data) {
+Node* newNode(int data, int x, int y) {
 	Node* node = (Node*)malloc(sizeof(Node));
 	node->data = data;
+    node->x = x;
+    node->y = y;
 	node->left = NULL;
     node->down = NULL;
     node->right = NULL;
@@ -23,17 +27,18 @@ Node* newNode(int data) {
 
 Node* insertNode(int **matrix, int **visited, int r, int c, Node* root, int y, int x) {
 	if (y < r && x < c) {
-		Node* temp = newNode(matrix[y][x]);
+		Node* temp = newNode(matrix[y][x], x, y);
+        cout << x << " " << y << endl;
 		root = temp;
         visited[y][x] = 1;
         // show visited
-        // for (int i = 0; i < r; i++) {
-        //     for (int j = 0; j < c; j++) {
-        //         cout << visited[i][j] << " ";
-        //     }
-        //     cout << endl;
-        // }
-        // cout << endl;
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                cout << visited[i][j] << " ";
+            }
+            cout << endl;
+        }
+        cout << endl;
         // visit left
         if (x - 1 >= 0 && matrix[y][x - 1] != 0 && visited[y][x - 1] != 1) {
             root->left = insertNode(matrix, visited, r, c, root->left, y, x - 1);
@@ -64,15 +69,16 @@ void preOrder(Node* root) {
 	}
 }
 
-void printPathsRecur(Node* node, int* path, int pathLen);
+void printPathsRecur(Node* node, int* path, int pathLen, int r, int c);
 void printArray(int* path, int pathLen);
 
-void printPaths(Node* node, int pathLenMax) {
+void printPaths(Node* node, int r, int c) {
+    int pathLenMax = r * c;
 	int* path = new int[pathLenMax];
-	printPathsRecur(node, path, 0);
+	printPathsRecur(node, path, 0, r, c);
 }
 
-void printPathsRecur(Node* node, int* path, int pathLen) {
+void printPathsRecur(Node* node, int* path, int pathLen, int r, int c) {
 	if (node == NULL) {
         return;
     }
@@ -80,37 +86,33 @@ void printPathsRecur(Node* node, int* path, int pathLen) {
 	path[pathLen] = node->data;
 	pathLen++;
 	
-	/* it's a leaf, so print the path that led to here */
-	if (node->left == NULL && node->down == NULL && node->right == NULL && node->up == NULL) {
+	/* if to the destination, print the path that led to here */
+	if (node->y == r - 1 && node->x == c - 1) {
 		printArray(path, pathLen);
 	} else {
 		/* otherwise try both subtrees */
-		printPathsRecur(node->left, path, pathLen);
-		printPathsRecur(node->down, path, pathLen);
-		printPathsRecur(node->right, path, pathLen);
-		printPathsRecur(node->up, path, pathLen);
+		printPathsRecur(node->left, path, pathLen, r, c);
+		printPathsRecur(node->down, path, pathLen, r, c);
+		printPathsRecur(node->right, path, pathLen, r, c);
+		printPathsRecur(node->up, path, pathLen, r, c);
 	}
 }
 
 void printArray(int* path, int pathLen) {
     int sum = 0;
-    bool flag = true;
 	for (int i = 0; i < pathLen; i++) {
-		// cout << path[i] << " ";
+		cout << path[i] << " ";
         sum += path[i];
-        if (path[i] == -1) {
-            flag = false;
-        }
 	}
-    if (sum < MIN && flag) {
-        MIN = sum;
+    if (sum > MAX) {
+        MAX = sum;
     }
-    // cout << "sum = " << sum << endl;
+    cout << "sum = " << sum << endl;
 }
 
 int main(void) {
-    int r, c, x, y;
-    cin >> r >> c >> x >> y;
+    int r, c;
+    cin >> r >> c;
     // int matrix[m][n]; // fixed size array
     int** matrix = new int* [r]; // dynamic array
     int** visited = new int* [r]; // dynamic array
@@ -122,16 +124,16 @@ int main(void) {
     for (int i = 0; i < r; i++) {
         for (int j = 0; j < c; j++) {
             cin >> matrix[i][j];
-            // cout << matrix[i][j] << " ";
+            cout << matrix[i][j] << " ";
         }
-        // cout << endl;
+        cout << endl;
     }
-    // cout << endl;
-    Node* root = insertNode(matrix, visited, r, c, root, y, x);
+    cout << endl;
+    Node* root = insertNode(matrix, visited, r, c, root, 0, 0);
     // preOrder(root);
-    printPaths(root, r * c);
+    printPaths(root, r, c);
     delete [] matrix;
     delete [] visited;
-	cout << MIN << endl;
+	cout << MAX << endl;
     return 0;
 }

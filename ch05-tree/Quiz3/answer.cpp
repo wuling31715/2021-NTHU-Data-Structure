@@ -28,17 +28,8 @@ Node* newNode(int data, int x, int y) {
 Node* insertNode(int **matrix, int **visited, int r, int c, Node* root, int y, int x) {
 	if (y < r && x < c) {
 		Node* temp = newNode(matrix[y][x], x, y);
-        cout << x << " " << y << endl;
 		root = temp;
         visited[y][x] = 1;
-        // show visited
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-                cout << visited[i][j] << " ";
-            }
-            cout << endl;
-        }
-        cout << endl;
         // visit left
         if (x - 1 >= 0 && matrix[y][x - 1] != 0 && visited[y][x - 1] != 1) {
             root->left = insertNode(matrix, visited, r, c, root->left, y, x - 1);
@@ -57,16 +48,6 @@ Node* insertNode(int **matrix, int **visited, int r, int c, Node* root, int y, i
         }
 	}
 	return root;
-}
-
-void preOrder(Node* root) {
-	if (root != NULL) {
-		cout << root->data << " ";
-		preOrder(root->left);
-		preOrder(root->down);
-		preOrder(root->right);
-		preOrder(root->up);
-	}
 }
 
 void printPathsRecur(Node* node, int* path, int pathLen, int r, int c);
@@ -101,13 +82,11 @@ void printPathsRecur(Node* node, int* path, int pathLen, int r, int c) {
 void printArray(int* path, int pathLen) {
     int sum = 0;
 	for (int i = 0; i < pathLen; i++) {
-		cout << path[i] << " ";
         sum += path[i];
 	}
     if (sum > MAX) {
         MAX = sum;
     }
-    cout << "sum = " << sum << endl;
 }
 
 int main(void) {
@@ -124,13 +103,9 @@ int main(void) {
     for (int i = 0; i < r; i++) {
         for (int j = 0; j < c; j++) {
             cin >> matrix[i][j];
-            cout << matrix[i][j] << " ";
         }
-        cout << endl;
     }
-    cout << endl;
     Node* root = insertNode(matrix, visited, r, c, root, 0, 0);
-    // preOrder(root);
     printPaths(root, r, c);
     delete [] matrix;
     delete [] visited;
